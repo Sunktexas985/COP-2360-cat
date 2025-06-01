@@ -1,0 +1,41 @@
+using System;
+
+// Define a basic interface
+public interface IAnimal
+{
+    void Speak();
+    string Describe();
+}
+
+// Cat class that implements the IAnimal interface
+public class Cat : IAnimal
+{
+    public string Name;
+    public int Age;
+    public string FavoriteToy;
+
+    public void Speak()
+    {
+        Console.WriteLine($"{Name} says: Meow!");
+    }
+
+    public string Describe()
+    {
+        return $"{Name} is {Age} years old and loves playing with {FavoriteToy}.";
+    }
+}
+
+// Main method to test Cat class
+class Program
+{
+    static void Main()
+    {
+        Cat myCat = new Cat();
+        myCat.Name = "Luna";
+        myCat.Age = 2;
+        myCat.FavoriteToy = "laser pointer";
+
+        myCat.Speak();
+        Console.WriteLine(myCat.Describe());
+    }
+}
