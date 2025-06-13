@@ -1,0 +1,101 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace DictionaryProject
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Declare the dictionary with string keys and List<string> values
+            Dictionary<string, List<string>> myDictionary = new Dictionary<string, List<string>>();
+            bool keepRunning = true;
+
+            while (keepRunning)
+            {
+                Console.WriteLine("\nChoose an option:");
+                Console.WriteLine("a. Populate the Dictionary");
+                Console.WriteLine("b. Display Dictionary Contents");
+                Console.WriteLine("c. Remove a Key");
+                Console.WriteLine("d. Add a New Key and Value");
+                Console.WriteLine("e. Add a Value to an Existing Key");
+                Console.WriteLine("f. Sort the Keys");
+                Console.WriteLine("x. Exit");
+                Console.Write("Enter your choice: ");
+
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "a":
+                        // Predefined keys and values (can be customized)
+                        myDictionary["Fruit"] = new List<string> { "Apple", "Banana" };
+                        myDictionary["Color"] = new List<string> { "Red", "Blue" };
+                        myDictionary["Animal"] = new List<string> { "Cat", "Dog" };
+                        Console.WriteLine("Dictionary populated.");
+                        break;
+
+                    case "b":
+                        Console.WriteLine("\nDictionary Contents:");
+                        foreach (var kvp in myDictionary)
+                        {
+                            Console.WriteLine($"{kvp.Key}: {string.Join(", ", kvp.Value)}");
+                        }
+                        break;
+
+                    case "c":
+                        Console.Write("Enter the key to remove: ");
+                        string keyToRemove = Console.ReadLine();
+                        if (myDictionary.Remove(keyToRemove))
+                            Console.WriteLine("Key removed.");
+                        else
+                            Console.WriteLine("Key not found.");
+                        break;
+
+                    case "d":
+                        Console.Write("Enter new key: ");
+                        string newKey = Console.ReadLine();
+                        Console.Write("Enter value for the key: ");
+                        string newValue = Console.ReadLine();
+                        myDictionary[newKey] = new List<string> { newValue };
+                        Console.WriteLine("New key-value pair added.");
+                        break;
+
+                    case "e":
+                        Console.Write("Enter the key to add a value to: ");
+                        string existingKey = Console.ReadLine();
+                        if (myDictionary.ContainsKey(existingKey))
+                        {
+                            Console.Write("Enter new value: ");
+                            string valueToAdd = Console.ReadLine();
+                            myDictionary[existingKey].Add(valueToAdd);
+                            Console.WriteLine("Value added.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Key does not exist.");
+                        }
+                        break;
+
+                    case "f":
+                        Console.WriteLine("\nSorted Keys:");
+                        foreach (var key in myDictionary.Keys.OrderBy(k => k))
+                        {
+                            Console.WriteLine($"{key}: {string.Join(", ", myDictionary[key])}");
+                        }
+                        break;
+
+                    case "x":
+                        keepRunning = false;
+                        Console.WriteLine("Exiting program.");
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid option.");
+                        break;
+                }
+            }
+        }
+    }
+}
